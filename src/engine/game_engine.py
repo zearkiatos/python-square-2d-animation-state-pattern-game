@@ -92,27 +92,27 @@ class GameEngine:
     def _do_action(self, c_input: CInputCommand, event: pygame.event.Event):
         square_rectangle = self._player_component_surface.surface.get_rect(topleft=self._player_component_transform.position)
         if c_input.name == "PLAYER_LEFT":
-            if c_input.phase == CommandPhase.START and self._player_component_transform.position.x >= 0:
+            if c_input.phase == CommandPhase.START:
                 self._player_component_velocity.velocity.x -= self.player_config["input_velocity"]
-            elif c_input.phase == CommandPhase.END and square_rectangle.left > 0:
+            elif c_input.phase == CommandPhase.END:
                 self._player_component_velocity.velocity.x += self.player_config["input_velocity"]
         
         if c_input.name == "PLAYER_RIGHT":
-            if c_input.phase == CommandPhase.START and self._player_component_transform.position.x <= self.screen.get_width():
+            if c_input.phase == CommandPhase.START:
                 self._player_component_velocity.velocity.x += self.player_config["input_velocity"]
-            elif c_input.phase == CommandPhase.END and square_rectangle.right < self.screen.get_width():
+            elif c_input.phase == CommandPhase.END:
                 self._player_component_velocity.velocity.x -= self.player_config["input_velocity"]
         
         if c_input.name == "PLAYER_UP":
-            if c_input.phase == CommandPhase.START and self._player_component_transform.position.y >= 0:
+            if c_input.phase == CommandPhase.START:
                 self._player_component_velocity.velocity.y -= self.player_config["input_velocity"]
-            elif c_input.phase == CommandPhase.END and square_rectangle.top > 0:
+            elif c_input.phase == CommandPhase.END:
                 self._player_component_velocity.velocity.y += self.player_config["input_velocity"]
 
         if c_input.name == "PLAYER_DOWN":
-            if c_input.phase == CommandPhase.START and self._player_component_transform.position.y <= self.screen.get_height():
+            if c_input.phase == CommandPhase.START:
                 self._player_component_velocity.velocity.y += self.player_config["input_velocity"]
-            elif c_input.phase == CommandPhase.END and square_rectangle.bottom < self.screen.get_height():
+            elif c_input.phase == CommandPhase.END:
                 self._player_component_velocity.velocity.y -= self.player_config["input_velocity"]
         
         if c_input.name == "PLAYER_FIRE":
