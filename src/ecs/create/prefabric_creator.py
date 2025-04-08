@@ -23,12 +23,14 @@ def create_square(world: esper.World, size: pygame.Vector2, position: pygame.Vec
 
     return square_entity
 
+def create_sprite(world: esper.World, position: pygame.Vector2, velocity: pygame.Vector2, surface: pygame.Surface) -> int:
+    sprite_entity = world.create_entity()
+    world.add_component(sprite_entity, CTransform(position))
+    world.add_component(sprite_entity, CVelocity(velocity))
+
 
 def create_enemy_square(world: esper.World, position: pygame.Vector2, enemy_info: dict):
-    width, height = tuple(enemy_info["size"].values())
-    red, green, blue = tuple(enemy_info["color"].values())
-    size = pygame.Vector2(width, height)
-    color = pygame.Color(red, green, blue)
+    enemy_surface = pygame.image.load(enemy_info["image"]).convert_alpha()
     velocity_max = enemy_info["velocity_max"]
     velocity_min = enemy_info["velocity_min"]
     velocity = pygame.Vector2(0, 0)
@@ -39,7 +41,7 @@ def create_enemy_square(world: esper.World, position: pygame.Vector2, enemy_info
             random.choice([-velocity_range, velocity_range])
         )
 
-    enemy_entity = create_square(world, size, position, velocity, color)
+    enemy_entity = create_sprite(world, position, velocity, enemy_surface)
     world.add_component(enemy_entity, CTagEnemy())
     return enemy_entity
 
