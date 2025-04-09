@@ -57,13 +57,13 @@ def create_enemy_spawner(world: esper.World, level_data: dict):
 
 
 def create_player_square(world: esper.World, player_info: dict, player_level_info: dict) -> int:
-    size = pygame.Vector2(tuple(player_info["size"].values()))
-    color = pygame.Color(tuple(player_info["color"].values()))
+    player_sprite = pygame.image.load(player_info["image"]).convert_alpha()
+    size = player_sprite.get_size()
     x, y = tuple(player_level_info["position"].values())
-    position = pygame.Vector2(x - (size.x/2), y - (size.y/2))
+    position = pygame.Vector2(x - (size[0]/2), y - (size[1]/2))
     velocity = pygame.Vector2(0, 0)
 
-    player_entity = create_square(world, size, position, velocity, color)
+    player_entity = create_sprite(world, position, velocity, player_sprite)
     world.add_component(player_entity, CTagPlayer())
     return player_entity
 
