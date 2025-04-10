@@ -2,6 +2,7 @@ import random
 import esper
 import pygame
 
+from src.ecs.components.c_animation import CAnimation
 from src.ecs.components.c_input_command import CInputCommand
 from src.ecs.components.c_surface import CSurface
 from src.ecs.components.c_transform import CTransform
@@ -65,6 +66,7 @@ def create_player_square(world: esper.World, player_info: dict, player_level_inf
 
     player_entity = create_sprite(world, position, velocity, player_sprite)
     world.add_component(player_entity, CTagPlayer())
+    world.add_component(player_entity, CAnimation(player_info["animations"]))
     return player_entity
 
 
