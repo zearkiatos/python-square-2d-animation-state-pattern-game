@@ -60,7 +60,8 @@ $ python3 main.py
 
 # Game
 
-![game-square-shooter](https://github.com/user-attachments/assets/cdc025db-b2d0-401c-be64-d4833ded3dcd)
+![WhatsApp GIF 2025-04-11 at 19 31 13](https://github.com/user-attachments/assets/d91d834f-d6e2-4981-aadf-f778c4b1145f)
+
 
 
 
