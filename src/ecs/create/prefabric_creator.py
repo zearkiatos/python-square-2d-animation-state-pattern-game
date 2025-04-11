@@ -60,6 +60,7 @@ def create_enemy_spawner(world: esper.World, level_data: dict):
 def create_player_square(world: esper.World, player_info: dict, player_level_info: dict) -> int:
     player_sprite = pygame.image.load(player_info["image"]).convert_alpha()
     size = player_sprite.get_size()
+    size = (size[0] / player_info["animations"]["number_frames"], size[1])
     x, y = tuple(player_level_info["position"].values())
     position = pygame.Vector2(x - (size[0]/2), y - (size[1]/2))
     velocity = pygame.Vector2(0, 0)
@@ -92,9 +93,12 @@ def create_bullet_square(world: esper.World, bullet_info: dict, player_entity: i
         bullet_info["image"]).convert_alpha()
     player_position = world.component_for_entity(player_entity, CTransform)
     player_surface = world.component_for_entity(player_entity, CSurface)
+    bullet_size = bullet_surface.get_rect().size
     position = pygame.Vector2(
-        player_position.position.x + player_surface.surface.get_size()[0]/2,
-        player_position.position.y + player_surface.surface.get_size()[1]/2
+        player_position.position.x +
+        player_surface.area.size[0]/2 - (bullet_size[0]/2),
+        player_position.position.y +
+        player_surface.area.size[1]/2 - (bullet_size[1]/2)
     )
     direction = (mouse_position - position).normalize()
 

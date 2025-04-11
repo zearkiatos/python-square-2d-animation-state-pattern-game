@@ -4,6 +4,7 @@ from src.ecs.components.c_input_command import CInputCommand, CommandPhase
 from src.ecs.components.c_surface import CSurface
 from src.ecs.components.c_transform import CTransform
 from src.ecs.create.prefabric_creator import create_bullet_square, create_enemy_spawner, create_input_player, create_player_square
+from src.ecs.systems.s_animation import system_animation
 from src.ecs.systems.s_bullet_limit import system_bullet_limit
 from src.ecs.systems.s_collision_bullet_enemy import system_collision_bullet_enemy
 from src.ecs.systems.s_collision_player_enemy import system_collision_player_enemy
@@ -71,6 +72,7 @@ class GameEngine:
         system_collision_bullet_enemy(self.ecs_world)
         self.block_bullet = system_bullet_limit(self.ecs_world, self.levels_config["player_spawn"], self.screen)
         system_player_limit(self.ecs_world, self.screen)
+        system_animation(self.ecs_world, self.delta_time)
         self.ecs_world._clear_dead_entities()
 
     def _draw(self):
