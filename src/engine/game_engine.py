@@ -11,6 +11,7 @@ from src.ecs.systems.s_collision_player_enemy import system_collision_player_ene
 from src.ecs.systems.s_input_player import system_input_player
 from src.ecs.systems.s_movement import system_movement
 from src.ecs.systems.s_player_limit import system_player_limit
+from src.ecs.systems.s_player_state import system_player_state
 from src.ecs.systems.s_rendering import system_rendering
 from src.ecs.systems.s_screen_bounce import system_screen_bounce
 from src.ecs.systems.s_enemy_spawner import system_enemy_spawner
@@ -66,6 +67,7 @@ class GameEngine:
 
     def _update(self):
         system_movement(self.ecs_world, self.delta_time)
+        system_player_state(self.ecs_world)
         system_screen_bounce(self.ecs_world, self.screen)
         system_enemy_spawner(self.ecs_world, self.enemies_config, self.delta_time)
         system_collision_player_enemy(self.ecs_world, self._player_entity, self.levels_config)
@@ -92,7 +94,6 @@ class GameEngine:
         self.bullet_config = read_json_file("assets/cfg/bullet.json")
 
     def _do_action(self, c_input: CInputCommand, event: pygame.event.Event):
-        square_rectangle = self._player_component_surface.surface.get_rect(topleft=self._player_component_transform.position)
         if c_input.name == "PLAYER_LEFT":
             if c_input.phase == CommandPhase.START:
                 self._player_component_velocity.velocity.x -= self.player_config["input_velocity"]

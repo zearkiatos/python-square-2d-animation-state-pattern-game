@@ -4,6 +4,7 @@ import pygame
 
 from src.ecs.components.c_animation import CAnimation
 from src.ecs.components.c_input_command import CInputCommand
+from src.ecs.components.c_player_state import CPlayerState
 from src.ecs.components.c_surface import CSurface
 from src.ecs.components.c_transform import CTransform
 from src.ecs.components.c_velocity import CVelocity
@@ -68,6 +69,7 @@ def create_player_square(world: esper.World, player_info: dict, player_level_inf
     player_entity = create_sprite(world, position, velocity, player_sprite)
     world.add_component(player_entity, CTagPlayer())
     world.add_component(player_entity, CAnimation(player_info["animations"]))
+    world.add_component(player_entity, CPlayerState())
     return player_entity
 
 

@@ -14,7 +14,7 @@ def system_player_limit(world: esper.World, screen: pygame.Surface) -> None:
     c_surface: CSurface
     c_tag_player: CTagPlayer
     for _, (c_transform, c_velocity, c_surface, _) in components:
-        player_rectangle = c_surface.surface.get_rect(topleft=c_transform.position)
+        player_rectangle = CSurface.get_area_relative(c_surface.area, c_transform.position)
         if not screen_reactangle.contains(player_rectangle):
             player_rectangle.clamp_ip(screen_reactangle)
             c_transform.position.xy = player_rectangle.topleft

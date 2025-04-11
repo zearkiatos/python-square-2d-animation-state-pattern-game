@@ -13,3 +13,8 @@ class CSurface:
         c_surface.surface = surface
         c_surface.area = surface.get_rect()
         return c_surface
+
+    def get_area_relative(area: pygame.Rect, position_topleft:pygame.Vector2):
+        new_rectangle = area.copy()
+        new_rectangle.topleft = position_topleft
+        return new_rectangle

@@ -14,7 +14,7 @@ def system_bullet_limit(world: esper.World, levels_config: dict, screen:pygame.S
     c_surface:CSurface
     c_tag_bullet:CTagBullet
     for entity, (c_transform,c_surface,_) in components:
-        bullet = c_surface.surface.get_rect(topleft=c_transform.position)
+        bullet = CSurface.get_area_relative(c_surface.area, c_transform.position)
         if bullet.left < 0 or bullet.right > screen_rectangle.width:
             world.delete_entity(entity)
             bullets_quantity -= 1
